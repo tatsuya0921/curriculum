@@ -1,0 +1,49 @@
+--問1--
+以下の冗長構成において、ルートブリッジに該当するスイッチの番号を答えてください。
+
+なお、各スイッチのブリッジプライオリティは以下とします。
+　・Switch1：32769
+　・Switch2：20481
+　・Switch3：4097
+　・Switch4：8193
+
+ルートブリッジ：Switch３
+
+--問2--
+問1に追加して、全てのポートの役割を答えてください。
+また、各回答の理由を併せて明記してください。
+
+Switch1 F0/1   F0/1 Switch2
+F0/2                   F0/2
+
+
+E0/1                   E0/1
+Switch3 E0/2   E0/2 Switch4
+
+Switch1について
+1.Switch1-Switch3:100
+2.Switch1-Switch2-Switch4-Switch3:19+100+100=219
+1番の経路のルートパスコストの方が値が小さいので、Switch1のF0/2のポートがルートポートになる。
+
+Switch2について
+1.Switch2-Switch1-Swithc3:19+100=119
+2.Switch2-Switch4-Switch3:100+100=200
+1番の経路のルートパスコストの方が値が小さいので、Switch2のF0/1のポートがルートポートになる。
+
+Switch4について
+1.Switch4-Switch2-Swithc1-Switch3:100+19+100=219
+2.Switch4-Switch3:100
+2番の経路のルートパスコストの方が値が小さいので、Switch4のE0/2のポートがルートポートになる。
+
+Switch2とSwitch4ではSwitch2が119、Switch4が100となりSwitch4の方がルートパスコストが小さいので
+Switch4のE0/1が指定ポートとなる
+
+Switch2のF0/2はルーとポートでも指定ポートでもないためブロッキングポートとなる
+
+Switch1 DP      RP Switch2
+RP                      BP
+
+
+DP                      DP
+Switch3 DP      RP Switch4
+
